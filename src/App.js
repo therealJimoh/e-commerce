@@ -24,6 +24,12 @@ const App = () => {
         setCart(item.cart);
     }
 
+    const handleUpdateCartQty = async (productId, quantity) => {
+        const response = await commerce.cart.update(productId, {quantity} );
+
+        setCart(response.cart);
+    }
+
     useEffect(() => {
         fetchProducts(); 
         fetchCart();
