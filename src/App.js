@@ -61,9 +61,9 @@ const App = () => {
                 <Cart cart={cart} />
                     <Cart
                         cart={cart}
-                        handleUpdateCartQty={handleUpdateCartQty}
-                        handleRemoveFromCart={handleRemoveFromCart}
-                        handleEmptyCart={handleEmptyCart}                   
+                        onUpdateCartQty={handleUpdateCartQty}
+                        onRemoveFromCart={handleRemoveFromCart}
+                        onEmptyCart={handleEmptyCart}                   
                     />
                 </Route>
             </Switch>
