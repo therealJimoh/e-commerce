@@ -11,12 +11,24 @@ import {
 } from "@material-ui/core";
 
 import useStyles from "./CheckoutStyles";
+import AddressForm from "../AddressForm";
+import PaymentForm from "../PaymentForm";
 
 const steps = ['Shipping address', 'Payment details' ];
 
 const Checkout = () => {
     const [activeStep, setActiveStep] = useState(0);
     const classes = useStyles();
+
+    const Confirmation = () => (
+        <div>
+            Confirmation
+        </div>
+    );
+
+    const Form = () => activeStep === 0
+        ? <AddressForm />
+        : <PaymentForm />
 
     return (
         <>
@@ -33,6 +45,7 @@ const Checkout = () => {
                             </Step>
                         ))}
                     </Stepper>
+                    { activeStep === steps.length ? <Confirmation /> : <Form /> }
                 </Paper>
            </main>
         </>
