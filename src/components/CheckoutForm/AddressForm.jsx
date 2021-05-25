@@ -9,18 +9,24 @@ import {
 } from '@material-ui/core';
 import { useForm, FormProvider } from 'react-hook-form';
 
+import { commerce } from '../../lib/commerce';
+
 import FormInput from './CustomTextField';
 
 const AddressForm = () => {
     const [shippingCountries, setShippingCountries] = useState([]);
-    const [shippingCountry, setShippingCountry] = useState([]);
+    const [shippingCountry, setShippingCountry] = useState('');
     const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
     const [shippingSubdivision, setShippingSubdivision] = useState('');
     const [ShippingOptions, setShippingOptions] = useState([]);
     const [ShippingOption, setShippingOption] = useState('');
-
-
     const methods = useForm();
+
+    const fetchShippingCountries = async (checkoutTokenId) => {
+        const { countries } = await commerce.services.locallistShippingCountries(checkoutTokenId);
+
+        setShippingCountries(countries);
+    }
 
 
     return (
@@ -37,7 +43,7 @@ const AddressForm = () => {
                         <FormInput required name='email' label='Email' />
                         <FormInput required name='city' label='City' />
                         <FormInput required name='zip' label='ZIP / Postal code' />
-                        <Grid item xs={12} sm={6}>
+                        {/* <Grid item xs={12} sm={6}>
                             <InputLabel>Shipping Country</InputLabel>
                             <Select value={} fullWidth onChange={}>
                                 <MenuItem key={} value={}>
@@ -60,7 +66,7 @@ const AddressForm = () => {
                                     Select Me
                                 </MenuItem>
                             </Select>
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 </form>
             </FormProvider>
