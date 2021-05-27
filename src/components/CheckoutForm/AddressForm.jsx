@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     InputLabel,
     Select,
@@ -13,7 +13,7 @@ import { commerce } from '../../lib/commerce';
 
 import FormInput from './CustomTextField';
 
-const AddressForm = () => {
+const AddressForm = ( { checkoutToken } ) => {
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState('');
     const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -25,8 +25,13 @@ const AddressForm = () => {
     const fetchShippingCountries = async (checkoutTokenId) => {
         const { countries } = await commerce.services.locallistShippingCountries(checkoutTokenId);
 
+        console.log(countries);
         setShippingCountries(countries);
     }
+
+    useEffect(() => {
+        fetchShippingCountries(checkoutToken.id)
+    }, [])
 
 
     return (
